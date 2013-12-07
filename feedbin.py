@@ -54,7 +54,7 @@ for entry_id in call("GET", "starred_entries.json"):
     published = dateutil.parser.parse(entry["published"])
     url = entry["url"]
     filename = u"%s - %s - %s.mp4"%(entry["author"], published.strftime("%Y-%m-%d"), entry["title"])
-    filename = filename.replace("/", "_")
+    filename = filename.replace("/", "_").replace("%", "_")
 
     if not os.path.exists(filename):
         print u"downloading %s"%filename
