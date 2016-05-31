@@ -49,7 +49,12 @@ except IOError:
 
 
 for entry_id in call("GET", "starred_entries.json"):
-    entry = call("GET", "entries/%s.json"%entry_id)
+    try:
+        entry = call("GET", "entries/%s.json"%entry_id)
+    except Exception as e:
+        print "Can't fetch entry %s: %s"%(entry_id, e)
+        continue
+
 
     published = dateutil.parser.parse(entry["published"])
     url = entry["url"]
